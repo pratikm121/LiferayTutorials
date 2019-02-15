@@ -71,6 +71,7 @@ public class SpringMVCPorletPortletViewController {
 		logger.warn(ParamUtil.getString(actionRequest, "username"));
 		logger.warn(ParamUtil.getString(actionRequest, "email"));
 		logger.warn(ParamUtil.getString(actionRequest, "hobbies"));
+		actionRequest.setAttribute("myParam", ParamUtil.getString(actionRequest, "email"));
 		System.out.println("==============");
 		
 		DataSourceConnection ds = new DataSourceConnection();		

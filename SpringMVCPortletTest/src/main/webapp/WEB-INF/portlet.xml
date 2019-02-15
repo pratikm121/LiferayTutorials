@@ -13,12 +13,12 @@
 		<supports>
 			<mime-type>text/html</mime-type>
 		</supports>
-		<resource-bundle>content.Language</resource-bundle>
+		<resource-bundle>content.Language</resource-bundle>		
 		<portlet-info>
 			<title>SpringMVCPorlet</title>
 			<short-title>SpringMVCPorlet</short-title>
-			<keywords>SpringMVCPorlet</keywords>
-		</portlet-info>
+			<keywords>SpringMVCPorlet</keywords>			
+		</portlet-info>		
 		<security-role-ref>
 			<role-name>administrator</role-name>
 		</security-role-ref>

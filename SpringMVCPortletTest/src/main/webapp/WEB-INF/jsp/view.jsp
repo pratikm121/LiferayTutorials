@@ -7,6 +7,7 @@
 <p>
 	<b>Hello </b> <c:out value="${myName}"/>
 	<b>Your Email is= </b> <c:out value="${myParams}"/>
+	<b>Your Jaan is= </b> <c:out value="${myJaan}"/>
 	
 </p>
 
