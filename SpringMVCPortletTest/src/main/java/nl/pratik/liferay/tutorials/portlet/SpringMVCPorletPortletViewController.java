@@ -1,7 +1,9 @@
 package nl.pratik.liferay.tutorials.portlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
+import javax.naming.NamingException;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.ReadOnlyException;
@@ -25,13 +27,14 @@ import com.liferay.portal.kernel.util.ParamUtil;
 public class SpringMVCPorletPortletViewController {
 	
 	private static final Logger logger = Logger.getLogger(SpringMVCPorletPortletViewController.class);
-
+	
 	@RenderMapping
 	public String view(RenderRequest request, RenderResponse response) {
 		logger.warn("Inside View methods testing");
 		request.setAttribute("myName", "Pratik Mehta");
-		//request.getAttribute("myParam") is used for data passed onto this rendered view from any actionPhase.
-		request.setAttribute("myParams", request.getAttribute("myParam"));		 
+		//request.getAttribute("XXX") is used for data passed onto this rendered view from any actionPhase.
+		request.setAttribute("myParams", request.getAttribute("myParams"));
+		request.setAttribute("myJaan", request.getAttribute("myJaan"));		 
 		return "view";
 	}
 	
@@ -55,17 +58,26 @@ public class SpringMVCPorletPortletViewController {
 	 * @throws ReadOnlyException 
 	 * @throws IOException 
 	 * @throws ValidatorException 
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
+	 * @throws NamingException 
 	 * @throws Exception if an exception occurred
 	 */
 	@ActionMapping(params = "action=myAction")
-	public void myAction(ActionRequest actionRequest, ActionResponse response) throws ReadOnlyException, ValidatorException, IOException {
+	public void myAction(ActionRequest actionRequest, ActionResponse response) throws ReadOnlyException, ValidatorException, IOException, SQLException, ClassNotFoundException, NamingException {
 		logger.warn("Inside myAction methods");
 		logger.warn(ParamUtil.getString(actionRequest, "firstName"));		// For retreiving the values from JSP form data
 		logger.warn(ParamUtil.getString(actionRequest, "lastName"));
 		logger.warn(ParamUtil.getString(actionRequest, "username"));
 		logger.warn(ParamUtil.getString(actionRequest, "email"));
 		logger.warn(ParamUtil.getString(actionRequest, "hobbies"));
-		actionRequest.setAttribute("myParam", ParamUtil.getString(actionRequest, "email"));			// For passing the calculated data to view again.
+		System.out.println("==============");
+		
+		DataSourceConnection ds = new DataSourceConnection();		
+		String myJaan = ds.getData();
+		System.out.println("myJaan = "+myJaan);
+		actionRequest.setAttribute(myJaan, myJaan);
+		
 		
 	}
 
