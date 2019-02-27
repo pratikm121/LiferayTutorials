@@ -2,7 +2,8 @@
 <!DOCTYPE display PUBLIC "-//Liferay//DTD Display 7.0.0//EN" "http://www.liferay.com/dtd/liferay-display_7_0_0.dtd">
 
 <display>
-	<category name="SpringMVC">
-		<portlet id="SpringMVCPortletTest" />
+	<category name="Pratik's Portlets">
+		<portlet id="SpringMVCController" />
+		<portlet id="MyController" />
 	</category>
 </display>

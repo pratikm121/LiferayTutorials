@@ -1,4 +1,4 @@
-package nl.pratik.liferay.tutorials.portlet;
+package nl.pratik.liferay.tutorials.common;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +17,7 @@ public class DataSourceConnection {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String JNDI = "jdbc/liferay";
+		String JNDI = "jdbc/liferaydb";
 		Context context = new InitialContext();
 		Context envContext  = (Context)context.lookup("java:/comp/env");
 		DataSource ds = (DataSource)envContext.lookup(JNDI);		

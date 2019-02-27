@@ -1,4 +1,4 @@
-<%@ include file="/WEB-INF/jsp/init.jsp" %>
+<%@ include file="/jsp/init.jsp" %>
 
 <strong>
 	<liferay-ui:message key="Welcome to AnotherViewURL" />

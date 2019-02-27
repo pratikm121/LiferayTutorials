@@ -2,12 +2,16 @@
 
 <portlet-app xmlns="http://xmlns.jcp.org/xml/ns/portlet" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/portlet http://xmlns.jcp.org/xml/ns/portlet/portlet-app_3_0.xsd" version="3.0">
 	<portlet>
-		<portlet-name>springmvcporlet</portlet-name>
-		<display-name>SpringMVCPorlet</display-name>
+		<portlet-name>SpringMVCController</portlet-name>
+		<display-name>SpringMVCController</display-name>
 		<portlet-class>org.springframework.web.portlet.DispatcherPortlet</portlet-class>
 		<init-param>
 			<name>contextConfigLocation</name>
-			<value>/WEB-INF/spring-context/portlet/SpringMVCPortletTest.xml</value>
+			<value>/WEB-INF/springmvccontroller.xml</value>
+		</init-param>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/jsp/portal1/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -15,9 +19,44 @@
 		</supports>
 		<resource-bundle>content.Language</resource-bundle>		
 		<portlet-info>
-			<title>SpringMVCPorlet</title>
-			<short-title>SpringMVCPorlet</short-title>
-			<keywords>SpringMVCPorlet</keywords>			
+			<title>SpringMVCController!!</title>
+			<short-title>SpringMVCController</short-title>
+			<keywords>SpringMVCController</keywords>			
+		</portlet-info>		
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>MyController</portlet-name>
+		<display-name>MyController</display-name>
+		<portlet-class>org.springframework.web.portlet.DispatcherPortlet</portlet-class>
+		<init-param>
+			<name>contextConfigLocation</name>
+			<value>/WEB-INF/mycontroller.xml</value>
+		</init-param>
+		<init-param>
+			<name>view-template</name>
+			<value>/jsp/portal2/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<!-- <resource-bundle>content.Language</resource-bundle> -->		
+		<portlet-info>
+			<title>MyController!!</title>
+			<short-title>MyController</short-title>
+			<keywords>MyController</keywords>			
 		</portlet-info>		
 		<security-role-ref>
 			<role-name>administrator</role-name>

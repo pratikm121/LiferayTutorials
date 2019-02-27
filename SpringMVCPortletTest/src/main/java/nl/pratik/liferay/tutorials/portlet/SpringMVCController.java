@@ -9,6 +9,8 @@ import javax.portlet.ActionResponse;
 import javax.portlet.ReadOnlyException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 import javax.portlet.ValidatorException;
 
 import org.apache.log4j.Logger;
@@ -16,34 +18,32 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.portlet.bind.annotation.ActionMapping;
 import org.springframework.web.portlet.bind.annotation.RenderMapping;
+import org.springframework.web.portlet.bind.annotation.ResourceMapping;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.ParamUtil;
+
+import nl.pratik.liferay.tutorials.common.DataSourceConnection;
 
 /**
  * @author Pratik Mehta
  */
 @Controller
 @RequestMapping("VIEW")
-public class SpringMVCPorletPortletViewController {
+public class SpringMVCController {
 	
-	private static final Logger logger = Logger.getLogger(SpringMVCPorletPortletViewController.class);
+	private static final Logger logger = Logger.getLogger(SpringMVCController.class);
 	
 	@RenderMapping
 	public String view(RenderRequest request, RenderResponse response) {
 		logger.warn("Inside View methods testing");
-		request.setAttribute("myName", "Pratik Mehta");
-		//request.getAttribute("XXX") is used for data passed onto this rendered view from any actionPhase.
-		request.setAttribute("myParams", request.getAttribute("myParams"));
-		request.setAttribute("myJaan", request.getAttribute("myJaan"));		 
 		return "view";
 	}
 	
 	/**
 	 * Handles the view when the action is <code>anotherView</code>.
-	 *
-	 * @param  request the render request
-	 * @param  response the render response
-	 * @return the view result
 	 **/
 	@RenderMapping(params = "action=anotherView")
 	public String anotherView(RenderRequest request, RenderResponse response) {
@@ -53,15 +53,6 @@ public class SpringMVCPorletPortletViewController {
 	
 	/**
 	 * Handles the action when the action key is <code>myAction</code>.
-	 * @param  actionRequest the action request
-	 * @param  response the action response
-	 * @throws ReadOnlyException 
-	 * @throws IOException 
-	 * @throws ValidatorException 
-	 * @throws SQLException 
-	 * @throws ClassNotFoundException 
-	 * @throws NamingException 
-	 * @throws Exception if an exception occurred
 	 */
 	@ActionMapping(params = "action=myAction")
 	public void myAction(ActionRequest actionRequest, ActionResponse response) throws ReadOnlyException, ValidatorException, IOException, SQLException, ClassNotFoundException, NamingException {
@@ -77,10 +68,39 @@ public class SpringMVCPorletPortletViewController {
 		DataSourceConnection ds = new DataSourceConnection();		
 		String myJaan = ds.getData();
 		System.out.println("myJaan = "+myJaan);
-		actionRequest.setAttribute(myJaan, myJaan);
-		
-		
+		actionRequest.setAttribute(myJaan, myJaan);		
 	}
-
+	
+	@ResourceMapping(value="myRestCallId")
+    public void findStateForCountry(ResourceRequest request, ResourceResponse response) throws IOException  {
+		String countryName = ParamUtil.getString(request, "mycountry");
+		System.out.println("Got the rests call= "+countryName);
+		
+		JSONArray stateArray = JSONFactoryUtil.createJSONArray();
+		JSONObject stateObject,stateObject2;
+		
+		if(countryName.equalsIgnoreCase("india")){
+			System.out.println("Inside india");
+			stateObject = JSONFactoryUtil.createJSONObject();
+			stateObject.put("stateId", "1");
+			stateObject.put("name", "West Bengal");
+			
+			stateObject2 = JSONFactoryUtil.createJSONObject();
+			stateObject2.put("stateId", "2");
+			stateObject2.put("name", "Maharastra");			
+		}else{		
+			System.out.println("Inside America");
+			stateObject = JSONFactoryUtil.createJSONObject();
+			stateObject.put("stateId", "21");
+			stateObject.put("name", "LASS");
+			
+			stateObject2 = JSONFactoryUtil.createJSONObject();
+			stateObject2.put("stateId", "22");
+			stateObject2.put("name", "California");
+		}
+		    stateArray.put(stateObject);
+		    stateArray.put(stateObject2);
+		    response.getWriter().println(stateArray);
+	}
 	
 }
