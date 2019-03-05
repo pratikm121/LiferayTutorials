@@ -37,4 +37,31 @@ To add new portlet, you need to create separate controller package, jsp folder, 
 # Reference taken from 
 http://www.opensource-techblog.com/2017/08/maven-spring-mvc-portlet.html
 
+#####################################################################################
+#LiferayPortlet
+
+This project is built purely on liferay and build by gradle.
+
+#####################################################################################
+#MySpringMVCPlugin
+
+This project is built purely on SpringMVC model and build by maven.
+This module showcases the use of different resources of a controller. 
+For example :- @RenderMapping , @ActionMapping , @ResourceMapping
+It also shows examples of how to use Ajax/Jquery for sending data back n forth.
+
+#####################################################################################
+#OfficeCommonUtils
+
+This is a plain java based util project to be used by all liferay projects for connecting to databases.
+Other common utilities can also be implemented in here.
+
+#####################################################################################
+#SpringPlugin
+
+This project is being used in combination with #MySpringMVCPlugin.
+It shows an example of InterPorletCommunication (IPC).
+
+#####################################################################################
+
 
