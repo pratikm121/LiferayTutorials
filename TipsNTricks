@@ -1,6 +1,6 @@
 Following are some tips to follow while setting up the liferay :- 
 
-# Setting up multiple database and using datasource jndi to connect.
+#Setting up multiple database and using datasource jndi to connect.
 
 1. Go to the tomcat/conf directory and edit context.xml file and add following entries 
 
@@ -49,7 +49,7 @@ Following are some tips to follow while setting up the liferay :-
 jdbc.default.jndi.name=jdbc/liferay
 
 3. Add method in database connection class to get jdbc using the jndi naming method. 
-# (Use this method if you are using normal java based independant module to connect to your db. Else follow step 4)
+#(Use this method if you are using normal java based independant module to connect to your db. Else follow step 4)
 
 public static Connection getConnection(String connectionSource) throws SQLException, NamingException{
 		Connection conn = null;
