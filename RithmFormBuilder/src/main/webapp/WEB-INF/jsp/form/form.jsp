@@ -58,7 +58,13 @@
       <input id="text" name="text" type="text" class="form-control">
     </div>
   </div>  
-  <div class="form-group">
-    <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+  <div class="form-group">    
+    <button name="submit" type="submit" id = "submit" class="btn btn-primary">Submit</button>
   </div>
 </form:form>
+
+<script>
+$(document).ready(function(){
+
+});
+</script>

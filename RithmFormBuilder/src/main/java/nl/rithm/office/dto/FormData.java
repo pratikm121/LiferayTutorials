@@ -15,8 +15,8 @@ public class FormData implements Serializable{
 	private String jobDescription;
 	private String gender;
 	private String personalMobileNumber;
-	private Date dob;
-	private Date doj ;
+	private String dob;
+	private String doj ;
 	
 	public String getFirstName() {
 		return firstName;
@@ -66,16 +66,16 @@ public class FormData implements Serializable{
 	public void setPersonalMobileNumber(String personalMobileNumber) {
 		this.personalMobileNumber = personalMobileNumber;
 	}
-	public Date getDob() {
+	public String getDob() {
 		return dob;
 	}
-	public void setDob(Date dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
 	}
-	public Date getDoj() {
+	public String getDoj() {
 		return doj;
 	}
-	public void setDoj(Date doj) {
+	public void setDoj(String doj) {
 		this.doj = doj;
 	}
 	
