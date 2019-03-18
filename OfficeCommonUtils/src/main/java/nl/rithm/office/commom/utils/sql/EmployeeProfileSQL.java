@@ -9,17 +9,15 @@ import java.util.List;
 
 import javax.naming.NamingException;
 
-import nl.rithm.office.commom.utils.ApplicationConstants;
-import nl.rithm.office.commom.utils.db.DatabaseConnectionSetup;
 import nl.rithm.office.commom.utils.model.EmployeeAddressDetails;
 import nl.rithm.office.commom.utils.model.EmployeeContactDetails;
 import nl.rithm.office.commom.utils.model.EmployeeProfile;
 
 public class EmployeeProfileSQL {
 	
-	public List<EmployeeProfile> getAllEmployees() throws SQLException, NamingException{
+	public List<EmployeeProfile> getAllEmployees(Connection con) throws SQLException, NamingException{
 		List<EmployeeProfile> employeeProfileList = new ArrayList<EmployeeProfile>();
-		Connection con = DatabaseConnectionSetup.getConnection(ApplicationConstants.APPLICATION_DB);
+		//con = DatabaseConnectionSetup.getConnection(ApplicationConstants.APPLICATION_DB);
 		PreparedStatement ps = con.prepareStatement("SELECT emp.employeenumber , emp.firstname , emp.lastname, c.officemobilenumber, c.officeemailaddress, d.country "
 													+ "FROM EMPLOYEEPROFILE emp, EMPLOYEECONTACTDETAILS c, EMPLOYEEADDRESSDETAILS d "
 													+ "WHERE emp.pkemployeeid = c.fkemployeeid AND emp.pkemployeeid = d.fkemployeeid ");
@@ -57,9 +55,9 @@ public class EmployeeProfileSQL {
 		
 	}
 	
-	public EmployeeProfile getEmployeeByName(String employeeFirstName, String employeeLastName) throws SQLException, NamingException{
+	public EmployeeProfile getEmployeeByName(Connection con,String employeeFirstName, String employeeLastName) throws SQLException, NamingException{
 		EmployeeProfile emp = null;
-		Connection con = DatabaseConnectionSetup.getConnection(ApplicationConstants.APPLICATION_DB);
+		//Connection con = DatabaseConnectionSetup.getConnection(ApplicationConstants.APPLICATION_DB);
 		PreparedStatement ps = con.prepareStatement("SELECT emp.employeenumber , emp.firstname , emp.lastname, c.officemobilenumber, c.officeemailaddress, d.country "
 													+ "FROM EMPLOYEEPROFILE emp, EMPLOYEECONTACTDETAILS c, EMPLOYEEADDRESSDETAILS d "
 													+ "WHERE emp.pkemployeeid = c.fkemployeeid AND emp.pkemployeeid = d.fkemployeeid AND emp.firstname = ? "
