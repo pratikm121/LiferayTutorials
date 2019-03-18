@@ -1,6 +1,16 @@
 # LiferayTutorials
 Liferay repo for basic tutorials and hands on.
 
+# HibernateJPAImplementation
+This project is an example of creating Spring MVC Controller setup using simple Hibernate JPA implementation for connecting to the database.
+
+#####################################################################################
+
+# SpringJdbcImpl
+This project is an example of creating Spring MVC Controller setup using simple spring JDBC template for connecting to the database.
+
+#####################################################################################
+
 
 # SpringMVCPortletTest
 This project is an example of creating multiple Spring MVC Controller setup in a single plugin project.
