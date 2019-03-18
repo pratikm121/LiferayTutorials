@@ -24,9 +24,9 @@
 	<aui:button href="<%= myActionURL %>" value="Watch Me in Action!!!" />
 </aui:button-row>
 
-<div id="Submit">
-  <button type="submit" id = "SubmitButton">SubmitButton<span ></span></button>
-  <button type="submit" id = "SubmitButton2">SubmitButton2<span ></span></button>
+<div id="Submit" class="btn-group btn-group-lg">
+  <button type="button" class="btn btn-primary" id = "SubmitButton">SubmitButton<span ></span></button>
+  <button type="button" class="btn btn-primary" id = "SubmitButton2">SubmitButton2<span ></span></button>
   <p id="output"></p>
 </div>
 

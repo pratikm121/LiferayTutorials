@@ -2,6 +2,7 @@ package nl.rithm.office.portlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -30,6 +31,8 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.util.ParamUtil;
 
+import nl.rithm.office.commom.utils.ApplicationConstants;
+import nl.rithm.office.commom.utils.db.DatabaseConnectionSetup;
 import nl.rithm.office.commom.utils.model.EmployeeProfile;
 import nl.rithm.office.commom.utils.sql.EmployeeProfileSQL;
 
@@ -91,8 +94,10 @@ private static final Logger logger = Logger.getLogger(MySpringController.class);
 		session.setAttribute("firstName",ParamUtil.getString(actionRequest, "firstName"), PortletSession.APPLICATION_SCOPE);
 		session.setAttribute("lastName",ParamUtil.getString(actionRequest, "lastName"), PortletSession.APPLICATION_SCOPE);
 		
+		Connection con = DatabaseConnectionSetup.getConnection(ApplicationConstants.APPLICATIONDB_JNDI);
+		
 		EmployeeProfileSQL employeeProfileSQL = new EmployeeProfileSQL();
-		List<EmployeeProfile> employeeList = employeeProfileSQL.getAllEmployees();
+		List<EmployeeProfile> employeeList = employeeProfileSQL.getAllEmployees(con);
 		
 		if(!employeeList.isEmpty()) {
 			for(EmployeeProfile emp : employeeList) {
@@ -146,7 +151,7 @@ private static final Logger logger = Logger.getLogger(MySpringController.class);
         stateObject.put("output", site + "-"+author);
         resourceResponse.setProperty("output", site + "-"+author);
         
-        resourceResponse.getWriter().println(stateObject);        
+        resourceResponse.getWriter().println(stateObject); 
         
     }  
 	
