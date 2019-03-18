@@ -1,5 +1,6 @@
 package nl.rithm.portlet;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.naming.NamingException;
@@ -17,6 +18,8 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.util.PortalUtil;
 
+import nl.rithm.office.commom.utils.ApplicationConstants;
+import nl.rithm.office.commom.utils.db.DatabaseConnectionSetup;
 import nl.rithm.office.commom.utils.model.EmployeeProfile;
 import nl.rithm.office.commom.utils.sql.EmployeeProfileSQL;
 
@@ -35,6 +38,7 @@ public class RecieverPortlet extends MVCPortlet{
 		User currentUser = PortalUtil.getUser(renderRequest);
 		PortletSession session = renderRequest.getPortletSession();
 		EmployeeProfileSQL employeeProfileSQL = new EmployeeProfileSQL();
+		Connection con = DatabaseConnectionSetup.getConnection(ApplicationConstants.APPLICATIONDB_JNDI);
 		
 		if(currentUser !=null) {
 			logger.warn("currentUser="+ currentUser.getFirstName() + " " + currentUser.getLastName());
@@ -43,7 +47,7 @@ public class RecieverPortlet extends MVCPortlet{
 			logger.warn("Initials="+ currentUser.getInitials() + " JobTitle=" + currentUser.getJobTitle());
 			logger.warn("Password="+ currentUser.getPassword() + " ScreenName=" + currentUser.getScreenName());
 			
-			EmployeeProfile emp = employeeProfileSQL.getEmployeeByName(currentUser.getFirstName(), currentUser.getLastName());
+			EmployeeProfile emp = employeeProfileSQL.getEmployeeByName(con,currentUser.getFirstName(), currentUser.getLastName());
 			
 			if(emp !=null) {
 				renderRequest.setAttribute("emp", emp);
